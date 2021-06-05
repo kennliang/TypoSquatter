@@ -1,0 +1,8 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+  {% include 'message.twig' %}
+<form action="/reset"method="post">
+    <input type="submit" name="upvote" value="Reset MongoDB and the Queue" />
+</form>
+{% endblock %}
