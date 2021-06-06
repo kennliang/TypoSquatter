@@ -62,8 +62,8 @@ This project's goal is to provide users the ability to view all available typo v
 
 ## System Design
 ****
-TODO
- ![System Design]()
+
+ ![System Design](images/system-design.png)
 
  ***
 
