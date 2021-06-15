@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const shortid = require('shortid');
-const WebsiteTypo = require('.././typo.js');
-
+const WebsiteTypo = require('../models/typo.js');
+const mq = require('../connections/rabbitmq.js')()
+const cassandra = require('../connections/cassandra.js')
 
 function htmlspecialchars(str) 
 {
@@ -20,17 +21,21 @@ function htmlspecialchars(str)
 
 router.post('/scan',function(req,res,next){
 
-  async function scan(){
+  const scan = async function(req,res){
+    
     try
     {
       const {url} = req.body;
       if(!url.startsWith('www.'))
-        throw new Error("url does not begin with www.");
+        res.status(400).send({"status": "ERROR", "Message":"URL does not begin with www"});
       if(url.endsWith('.com') || url.endsWith('.net') || url.endsWith('.edu') || url.endsWith('.og'))
         ;
       else
-        throw new Error("url does not end with a valid extension that can be handled.")
+        res.status(400).send({"status": "ERROR", "Message": "Invalid URL extension"})
+     
       
+      console.log("wre")
+
       let web_typo = new WebsiteTypo(url);
       web_typo.missing_dot();
       web_typo.char_omission();
@@ -40,17 +45,26 @@ router.post('/scan',function(req,res,next){
       
       let typo_result = web_typo.typo_list;
       let input_website_id = shortid.generate();
+
+      for(let i = 0; i < typo_result.length; i++)
+      {
       
-  
+    
+      }
+
+      res.status(200).send({"status": "OK"});
     }
     catch(err)
     {
-      console.log("error at scan " + err);
+      console.log(err)
+      res.status(400).send({})
     }
+
   }
   scan(req,res);
-  
+
 });
+
 
 
 

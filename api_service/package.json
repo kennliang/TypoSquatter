@@ -7,12 +7,14 @@
     "devstart": "nodemon -e js,twig ./bin/www"
   },
   "dependencies": {
+    "amqplib": "^0.8.0",
+    "cassandra-driver": "^4.6.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^1.19.4",
+    "nodemon": "^2.0.7",
     "shortid": "^2.2.15"
   }
 }
