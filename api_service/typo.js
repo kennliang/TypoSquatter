@@ -1,6 +1,6 @@
 // make sure node and npm is install. Open the terminal in visual studio code and type "node typo.js" to run the file
 
-//console.log("hello world")
+
 
 class WebsiteTypo{
     constructor(website_url)
@@ -8,7 +8,6 @@ class WebsiteTypo{
         this.website = website_url;
         //ex : ".com" , ".org", ".net", ".io", etc.
         this.domain_name = website_url.substring(website_url.lastIndexOf("."));
-        //this.short_website = "google.com";
         this.typo_list = new Array();
         this.keysAdjTo = {
             1 : ["q", "2"],
