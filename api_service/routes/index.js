@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 const shortid = require('shortid');
 const WebsiteTypo = require('../models/typo.js');
-const mq = require('../connections/rabbitmq.js')()
-const cassandra = require('../connections/cassandra.js')
+const mq = require('../connections/rabbitmq.js')
+//const cassandra = require('../connections/cassandra.js')
 
 function htmlspecialchars(str) 
 {

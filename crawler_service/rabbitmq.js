@@ -1,4 +1,5 @@
 var amqp = require('amqplib')
+//var process_task = require('./client.js')
 
 const connection = async (queueName = 'tasks') => {
   try
@@ -6,10 +7,9 @@ const connection = async (queueName = 'tasks') => {
     var conn = await connect()
     var channel = await createChannel(conn)
     var assertedChannelToQueue = await channelAssertQueue(channel, queueName)
-    msg ="Hello World"
-    channel.sendToQueue(queue, Buffer.from(msg));
-
-    console.log(" [x] Sent %s", msg);
+    channel.consume('tasks',process_task, {
+      noAck: true
+    })
     return channel
   }
   catch(err)
@@ -18,6 +18,12 @@ const connection = async (queueName = 'tasks') => {
     console.log(err)
   }
 }
+
+function process_task(msg){
+  console.log(" [x] Received %s", msg.content.toString());
+}
+
+
 
 const connect = async(url = 'amqp://localhost') => {
   try {
