@@ -1,4 +1,5 @@
 var amqp = require('amqplib')
+require('dotenv').config();
 
 const connection = async (queueName = 'tasks') => {
   try
@@ -19,7 +20,7 @@ const connection = async (queueName = 'tasks') => {
   }
 }
 
-const connect = async(url = 'amqp://localhost') => {
+const connect = async(url = process.env.RABBITMQ_URL) => {
   try {
     return amqp.connect(url)
   }
