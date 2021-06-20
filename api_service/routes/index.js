@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const shortid = require('shortid');
 const WebsiteTypo = require('../models/typo.js');
-const mq = require('../connections/rabbitmq.js')
+const channel = require('../connections/rabbitmq.js')
 //const cassandra = require('../connections/cassandra.js')
 
 function htmlspecialchars(str) 
@@ -32,9 +32,7 @@ router.post('/scan',function(req,res,next){
         ;
       else
         res.status(400).send({"status": "ERROR", "Message": "Invalid URL extension"})
-     
-      
-      console.log("wre")
+    
 
       let web_typo = new WebsiteTypo(url);
       web_typo.missing_dot();
@@ -48,7 +46,7 @@ router.post('/scan',function(req,res,next){
 
       for(let i = 0; i < typo_result.length; i++)
       {
-      
+        channel.sendToQueue('tasks', Buffer.from(typo_result));
     
       }
 

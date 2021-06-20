@@ -1,5 +1,5 @@
 var amqp = require('amqplib')
-//var process_task = require('./client.js')
+var process_task = require('./client.js')
 require('dotenv').config();
 
 const connection = async (queueName = 'tasks') => {
@@ -19,10 +19,11 @@ const connection = async (queueName = 'tasks') => {
     console.log(err)
   }
 }
-
+/*
 function process_task(msg){
   console.log(" [x] Received %s", msg.content.toString());
-}
+
+}*/
 
 
 

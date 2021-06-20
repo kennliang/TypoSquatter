@@ -7,10 +7,6 @@ const connection = async (queueName = 'tasks') => {
     var conn = await connect()
     var channel = await createChannel(conn)
     var assertedChannelToQueue = await channelAssertQueue(channel, queueName)
-    msg ="Hello World"
-    channel.sendToQueue(queue, Buffer.from(msg));
-
-    console.log(" [x] Sent %s", msg);
     return channel
   }
   catch(err)
