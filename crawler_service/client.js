@@ -18,6 +18,8 @@ function htmlspecialchars(str) {
 	 }
 	return str;
 }
+
+
 /*
 const runcrawl = async function(urls,socket){
 	
